@@ -3,19 +3,20 @@
 
 static int isPrime(long int n);
 long int greatestPrimeDivisor(long int n);
+long int sumOfPrimesfactors(long int n);
 
 int main(int argc, char const *argv[])
 {
 	long int const N = 600851475147;
-	std::cout << "mayor_divisor_primo(" << N << ") = " << greatestPrimeDivisor(N) << std::endl;
+	//long int const N = 21;
+	std::cout << "suma_de_divisores_primos(" << N << ") = " << sumOfPrimesfactors(N) << std::endl;
 	return 0;
 }
 
 
-
-static long int isPrime(long int n)
+static int isPrime(long int n)
 {
-	for(long int y = 2; y < sqrt(n); y++)
+	for(long int y = 2; y <= sqrt(n); y++)
 	{
 		if(!(n%y))
 		{
@@ -50,4 +51,25 @@ long int greatestPrimeDivisor(long int n)
 
 	}
 	return 1;
+}
+
+long int sumOfPrimesfactors(long int n)
+{
+	long int sum = -1;
+	for(long int x = 1; x <= sqrt(n); x++)
+	{
+		if(!(n%x))
+		{
+			if(isPrime(x))
+			{
+				sum += x;
+			}
+			if(isPrime(n/x))
+			{
+							sum += n/x;
+			}
+		}
+	}
+
+	return sum;
 }
