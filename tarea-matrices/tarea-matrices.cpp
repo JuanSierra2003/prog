@@ -14,6 +14,9 @@ int main(int argc, char **argv) {
   const int N = std::atoi(argv[1]);
   const int SEED = std::atoi(argv[2]);
 
+  const int Pmax = 10;
+  const int Pmin = 2;
+
   std::cout.precision(16); std::cout.setf(std::ios::scientific);
 
   // data structs
@@ -39,11 +42,13 @@ int main(int argc, char **argv) {
   auto elapsed = std::chrono::duration<double>(stop - start);
   std::cout << elapsed.count() << "\n";
 
-
+  //ploting
   std::ofstream plot_data;
   plot_data.open("plot_data.txt");
 
-  for(int p = 2; p < 10; p++)
+  std::vector<double> X, Y;
+
+  for(int p = Pmin; p < Pmax; p++)
   {
     // data structs
     std::vector<double> A1(std::pow(2,2*p), 0.0), A2(std::pow(2,2*p), 0.0), A3(std::pow(2,2*p), 0.0);
@@ -57,8 +62,23 @@ int main(int argc, char **argv) {
     auto stop = std::chrono::high_resolution_clock::now();
 
     auto elapsed = std::chrono::duration<double>(stop - start);
-    plot_data << p << " " << elapsed.count() << "\n";
+    X.push_back(std::pow(2,p));
+    Y.push_back(elapsed.count());
   }
+
+  //Normalize
+  double tmp = Y[0];
+  for(auto & y : Y)
+  {
+    y /= tmp;
+  }
+
+  //writing
+  for(int id = 0; id < Pmax - Pmin; id++)
+  {
+    plot_data << X[id] << "\t" << Y[id] << "\n";
+  }
+
 
   return 0;
 }
