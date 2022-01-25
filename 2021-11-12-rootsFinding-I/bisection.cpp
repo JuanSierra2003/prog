@@ -30,7 +30,7 @@ double bisection(double xl, double xu, double eps, double f(double))
 	while(1)
 	{	
 		xr = (xu + xl)/2;
-		if(std::fabs(f(xr)<= eps)) break;
+		if(std::fabs(f(xr)) <= eps) break;
 		
 		iter++;
 

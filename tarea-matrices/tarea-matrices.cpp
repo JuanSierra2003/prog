@@ -53,9 +53,9 @@ int main(int argc, char **argv) {
     // data structs
     std::vector<double> A1(std::pow(2,2*p), 0.0), A2(std::pow(2,2*p), 0.0), A3(std::pow(2,2*p), 0.0);
 
-    std::generate(A1.begin(), A1.end(), [&gen, &dist](){ return dist(gen); }); // uses a lambda function
-    std::generate(A2.begin(), A2.end(), [&gen, &dist](){ return dist(gen); }); // uses a lambda function
-    std::generate(A3.begin(), A3.end(), [&gen, &dist](){ return dist(gen); }); // uses a lambda function
+    std::generate(A1.begin(), A1.end(), [&gen, &dist](){ return dist(gen); }); 
+    std::generate(A2.begin(), A2.end(), [&gen, &dist](){ return dist(gen); }); 
+    std::generate(A3.begin(), A3.end(), [&gen, &dist](){ return dist(gen); }); 
 
     auto start = std::chrono::high_resolution_clock::now();
     multiply(A1, A2, A3);
@@ -79,6 +79,9 @@ int main(int argc, char **argv) {
     plot_data << X[id] << "\t" << Y[id] << "\n";
   }
 
+  /* La grafica con ejes logaritmicos muestra lo que parece una recta con pendiente
+  entre 2 y 3, como observacion se puede decir que el tiempo de ejecucion crece a lo
+  mas con N^3 */
 
   return 0;
 }
